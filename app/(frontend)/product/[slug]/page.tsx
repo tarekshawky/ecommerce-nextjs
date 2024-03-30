@@ -2,6 +2,7 @@ import data from '@/lib/data'
 import Link from 'next/link'
 import React from 'react'
 import Image from "next/image";
+import AddToCart from '@/components/AddToCart';
 
 export default function page({params}:{params:{slug:string}}) {
     const product = data.products.find((x)=> x.slug=== params.slug)
@@ -58,6 +59,10 @@ export default function page({params}:{params:{slug:string}}) {
             <div>Status</div>
             <div>
                 {product.countInStock > 0 ? 'In stock' : 'Unavailable'}
+            </div>
+            <div>
+            <AddToCart item={{...product, qty:0 , color: '' , size: ''}}/>
+
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import Menu from './Menu';
 function Header() {
     return (
         <header className="bg-white">
@@ -25,19 +26,7 @@ function Header() {
       
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <a
-                  className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                  href="#"
-                >
-                  Login
-                </a>
-      
-                <a
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                  href="#"
-                >
-                  Register
-                </a>
+                <Menu/>
               </div>
       
               <button
