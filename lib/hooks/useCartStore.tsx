@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { round2 } from '../utils'
 import { OrderItem } from '../models/OrderModel'
-
+import { persist } from 'zustand/middleware'
 type Cart = {
     items: OrderItem[]
-    itemPrice: number
+    itemsPrice: number
     taxPrice:number
     shippingPrice: number
     totalPrice: number
@@ -13,19 +13,23 @@ type Cart = {
 
 const initialState: Cart = {
     items:[],
-    itemPrice: 0,
+    itemsPrice: 0,
     taxPrice:0,
     shippingPrice: 0,
     totalPrice: 0,
 }
 
-export const cartStore = create<Cart>(() => initialState)
+export const cartStore = create<Cart>()(
+    persist(() => initialState, {
+        name: 'cartStore'
+    })
+)
 
 export default function useCartService(){
-    const {items, itemPrice, taxPrice, shippingPrice, totalPrice} = cartStore()
+    const {items, itemsPrice, taxPrice, shippingPrice, totalPrice} = cartStore()
     return{
         items,
-        itemPrice,
+        itemsPrice,
         taxPrice,
         shippingPrice,
         totalPrice,
@@ -39,13 +43,33 @@ export default function useCartService(){
             const {itemsPrice, taxPrice, shippingPrice, totalPrice} = calcPrice(updateCartItems)
             cartStore.setState({
                 items:updateCartItems,
-                itemPrice,
+                itemsPrice,
                 shippingPrice,
                 taxPrice,
                 totalPrice
             })
 
         },
+        decrease: (item: OrderItem) => {
+            const exist = items.find((x) => x.slug === item.slug)
+            if(!exist) return
+            const updateCartItems = exist.qty === 1
+            ? items.filter((x: OrderItem) => x.slug !== item.slug)
+            : items.map((x) =>
+                (
+                    item.slug ? { ...exist, qty: exist.qty - 1 }
+                    : x
+                )
+            )
+            const {itemsPrice, taxPrice, shippingPrice, totalPrice} = calcPrice(updateCartItems)
+            cartStore.setState({
+                items:updateCartItems,
+                itemsPrice,
+                shippingPrice,
+                taxPrice,
+                totalPrice
+            })
+        }
     }
 }
 
