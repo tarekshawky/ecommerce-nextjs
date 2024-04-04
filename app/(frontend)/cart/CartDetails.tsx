@@ -71,6 +71,9 @@ export default function CartDetails(){
                             Subtotal ({items.reduce((a, c) => a + c.qty, 0)}) : $
                       {itemsPrice}
                     </div>
+                    <div>
+                        <button onClick={()=> router.push('/shipping')}>Proceed to Checkout</button>
+                    </div>
                 </div>
                 </div>
 
