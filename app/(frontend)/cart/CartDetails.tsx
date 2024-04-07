@@ -15,15 +15,15 @@ export default function CartDetails(){
     if(!mounted) return <></>
     return(
         <>
-            <h1>Shopping Cart</h1>
+            <h1 className="text-center text-xl font-bold my-8">Shopping Cart</h1>
             {items.length === 0 ? (
                 <div>
                     Cart is empty <Link href='/'>Go Shopping</Link>
                 </div>
             ):(
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl mx-auto my-4">
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto border p-4 rounded-md">
                 <table className="w-full divide-y-2 divide-gray-200 bg-white text-sm">
                     <thead className="ltr:text-left rtl:text-right">
                     <tr>
@@ -66,13 +66,13 @@ export default function CartDetails(){
                     </tbody>
                 </table>
                 </div>
-                <div>
+                <div className="flex flex-col gap-4 my-8">
                     <div>
                             Subtotal ({items.reduce((a, c) => a + c.qty, 0)}) : $
                       {itemsPrice}
                     </div>
                     <div>
-                        <button onClick={()=> router.push('/shipping')}>Proceed to Checkout</button>
+                        <button onClick={()=> router.push('/shipping')} className="bg-gray-900 hover:bg-gray-700 cursor-pointer text-white p-4 rounded-md">Proceed to Checkout</button>
                     </div>
                 </div>
                 </div>
