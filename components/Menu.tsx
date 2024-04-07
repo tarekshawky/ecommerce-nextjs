@@ -28,16 +28,16 @@ const Menu = () => {
    
       <div>
         <div className="flex items-center gap-4">
-        
-          
-            <Link className="bg-gray-900 text-white inline-flex w-20 justify-center py-2 rounded-md" href="/cart">
+            <div className='w-full'>
+            <Link className="bg-gray-900 text-white inline-flex w-20 justify-center gap-2 items-center py-2 rounded-md relative" href="/cart">
               Cart
               {mounted && items.length != 0 && (
-                <div className="bg-gray-900">
+                <div className="bg-red-900 rounded-full mt-[-0.5rem] py-1 px-2 text-sm">
                   {items.reduce((a, c) => a + c.qty, 0)}{' '}
                 </div>
               )}
             </Link>
+            </div>
         
           {session && session.user ? (
             <>
