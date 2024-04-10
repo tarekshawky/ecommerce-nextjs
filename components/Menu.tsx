@@ -81,7 +81,7 @@ const Menu = () => {
             
             </>
           ) : (
-            <div>
+            <div className='w-full'>
               <button
                 className="btn btn-ghost rounded-btn"
                 type="button"
