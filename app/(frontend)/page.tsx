@@ -25,29 +25,37 @@ export default async function Home() {
         dicta incidunt est ipsam, officia dolor fugit natus?
       </p>
     </header>
-
     <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
-      {featuredProducts.slice(1).map((product, index) => (
-      <li key={product._id} id={`slide-${index + 1}`}>
-        <Link href={`/product/${product.slug}`} className="group relative block">
-          <img   className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90" src={product.banner} alt={product.name} width={100} height={100}/>
-        </Link>
-      </li>
-    ))}
-     
-     
-
-      <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1" key={featuredProducts[0]._id} id={`slide-0`}>
-    
-      <Link  className="group relative block" href={`/product/${featuredProducts[0].slug}`}>
-        <img className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90" src={featuredProducts[0].banner} alt={featuredProducts[0].name} width={100} height={100}/>
+  {featuredProducts.slice(1).map((product, index) => (
+    <li key={product._id} id={`slide-${index + 1}`}>
+      <Link href={`/product/${product.slug}`} className="group relative block">
+        {product.banner && (
+          <Image
+            className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90"
+            src={product.banner}
+            alt={product.name}
+            width={1000}
+            height={1000}
+          />
+        )}
       </Link>
+    </li>
+  ))}
 
-  
-      </li>
-
-  
-    </ul>
+  <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1" key={featuredProducts[0]._id} id={`slide-0`}>
+    <Link className="group relative block" href={`/product/${featuredProducts[0].slug}`}>
+      {featuredProducts[0].banner && (
+        <Image
+          className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90"
+          src={featuredProducts[0].banner}
+          alt={featuredProducts[0].name}
+          width={1000}
+          height={1000}
+        />
+      )}
+    </Link>
+  </li>
+</ul>
   </div>
 </section>
 
